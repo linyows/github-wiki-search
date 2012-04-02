@@ -1,28 +1,44 @@
 // ==UserScript==
 // @name           Github Wiki Search
-// @namespace      github
+// @description    Search wiki of the repository at Github.
+// @namespace      GithubWikiSearch
 // @include        https://github.com/*/*/wiki*
-// @author         LINYOWS <linyows@gmail.com>
-// @require  http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js
-// @description    Search
+// @namespace      http://userscripts.org/scripts/show/129930
+// @author         linyows <linyows@gmail.com>
+// @version        1.0.1
 // ==/UserScript==
-
-// a function that loads jQuery and calls a callback function when jQuery has finished loading
-function addJQuery(callback)
+function useJquery(callback)
 {
-  var script = document.createElement("script");
-  script.setAttribute("src", "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js");
+  var script = document.createElement('script');
+  script.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
   script.addEventListener('load', function() {
-    var script = document.createElement("script");
-    script.textContent = "(" + callback.toString() + ")();";
+    var script = document.createElement('script');
+    script.textContent = '(' + callback.toString() + ')();';
     document.body.appendChild(script);
   }, false);
   document.body.appendChild(script);
 }
 
-// the guts of this userscript
-function main()
+function userScript()
 {
+  String.prototype.trim = function(){
+    return this.replace(new RegExp('( |　)$', 'g'), '');
+  };
+  String.prototype.spacesplit = function(){
+    return this.split(new RegExp(' |　', 'g'));
+  };
+  String.prototype.oneline = function(){
+    return this.replace(new RegExp('\n', 'g'), '')
+               .replace(new RegExp('\f', 'g'), '')
+               .replace(new RegExp('\r', 'g'), '')
+               .replace(new RegExp('<.*?>', 'ig'), '')
+               .replace(new RegExp('[\s　\t\n\r\"]', 'g'), '')
+               .replace(new RegExp('\"', 'g'), '');
+  };
+  String.prototype.sanitize = function(){
+    return this.replace(/&/g, '&amp;').replace(/'/g, '&quot;').replace(/'/g, '&#039;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  };
+
   var msg = 'Search this wiki...';
   var html = '<div id="search-wiki" style="display:inline-block;position:absolute;bottom:10px;right:0;">' +
              '<input type="text" value="'+ msg + '" id="search-words" style="color:#999;padding:3px 2px;"></div>';
@@ -73,9 +89,9 @@ function main()
     var args = hashArgs();
     var target_word = args.search_word;
     if (typeof(target_word) == 'undefined') { return; }
-    target_word = target_word.replace(/( |　)$/, '');
+    target_word = target_word.trim();
     if (target_word == '') { return; }
-    var target_words = target_word.split(/ |　/);
+    var target_words = target_word.spacesplit();
     for (var i = 0; i < target_words.length; i++) {
       $(div).each(function(){
         var text = $(this).html();
@@ -96,7 +112,7 @@ function main()
       $(this).css('background-color', '#DDEAF3').css('color', '#336699');
     });
     $('#close-results > a').click(function(){
-      $('#search-words').val('');
+      $('#search-words').css('color', '#999').val(msg);
       $('#results').fadeOut('slow');
       return false;
     });
@@ -139,7 +155,7 @@ function main()
              '<a href="' + result_data[i].link + '#search_word=' + input_word + '" target="_blank" style="font-size:14px;display:inline-block;padding-bottom:5px;">' +
              highlight(result_data[i].title, keywords) + '</a>' +
              '<span style="font-weight:normal;display:block;padding-left:1.5em;color:#333;font-size:13px;">' +
-             highlight(trim(result_data[i].body, keywords[0]), keywords) + '</span></li>';
+             highlight(pick(result_data[i].body, keywords[0]), keywords) + '</span></li>';
     }
     html+= '</ol>' + ((number_of_page > 1) ? pagination : '');
     return html;
@@ -149,10 +165,6 @@ function main()
     current_page = page;
     $('#results-inner').html(searchResultHtml(result_data));
     initEvent();
-  }
-
-  function h(s) {
-    return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#039;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   function highlight(text, words) {
@@ -165,7 +177,7 @@ function main()
     return decodeURIComponent(replaced_text);
   }
 
-  function trim(text, keyword) {
+  function pick(text, keyword) {
       var key = new RegExp(keyword, "i");
       var res = key.exec(text);
       var total_length = 200;
@@ -187,8 +199,7 @@ function main()
       return text;
   }
 
-  function search()
-  {
+  function search() {
     var progress = 0;
 
     for (i = number_of_search; i < entries.length; i++) {
@@ -241,13 +252,7 @@ function main()
   {
     var title = $(html).find('#head').find('h1').html();
     var body = $(html).find('#wiki-content').html();
-    body = body.replace(new RegExp('\n', 'g'), '')
-               .replace(new RegExp('\f', 'g'), '')
-               .replace(new RegExp('\r', 'g'), '')
-               .replace(new RegExp('<.*?>', 'ig'), '')
-               .replace(/[\s　\t\n\r\"]/g, '')
-               .replace(/\"/g, '');
-    body = h(body);
+    body = body.oneline().sanitize();
     entries[entries.length] = {title:title, body:body, link:link};
     search();
     number_of_page++;
@@ -280,7 +285,7 @@ function main()
     matched_url = [];
     current_page = 1;
     $('#results').remove();
-    input_word = text.replace( /( |　)$/, '');
+    input_word = text.trim();
     number_of_search = 0;
     if (input_word == '') { return; }
     var close_image = 'https://a248.e.akamai.net/assets.github.com/images/modules/account/close_pill.png';
@@ -295,7 +300,7 @@ function main()
                  '<div id="results-inner" style="font-size:12px;line-height:1.5;"></div>' +
                '</div>';
     $('#wiki-wrapper').prepend(html);
-    keywords = input_word.split(/ |　/);
+    keywords = input_word.spacesplit();
     archives();
   }
 
@@ -304,5 +309,4 @@ function main()
   });
 }
 
-// load jQuery and execute the main function
-addJQuery(main);
+useJquery(userScript);
