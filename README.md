@@ -1,16 +1,15 @@
 Github Wiki Search
 ==================
 
-This is greasemonkey script.  
+This is Userscript.  
 Search wiki of the repository on Github.
 
 Browser
 -------
 
-- Firefox
 - Chrome
-- Safari  
-  Note: need [NinjaKit](http://d.hatena.ne.jp/os0x/20100612/1276330696)
+- Firefox - need [Greasemonekey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)
+- Safari - need [NinjaKit](http://d.hatena.ne.jp/os0x/20100612/1276330696)
 
 Install
 -------
