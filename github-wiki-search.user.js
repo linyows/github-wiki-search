@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Github Wiki Search
-// @description    Search wiki of the repository at Github.
+// @description    Search wiki of the repository on Github.
 // @namespace      GithubWikiSearch
 // @include        https://github.com/*/*/wiki*
 // @namespace      http://userscripts.org/scripts/show/129930
