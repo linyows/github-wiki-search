@@ -7,16 +7,21 @@
 // @author         linyows <linyows@gmail.com>
 // @version        1.0.1
 // ==/UserScript==
-function useJquery(callback)
+function useLibrary(library, callback)
 {
-  var script = document.createElement('script');
-  script.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
-  script.addEventListener('load', function() {
+  var counter = 0;
+
+  for (var i in library) {
     var script = document.createElement('script');
-    script.textContent = '(' + callback.toString() + ')();';
+    script.setAttribute('src', library[i]);
+    script.addEventListener('load', function() {
+      var script = document.createElement('script');
+      counter++;
+      if (counter == library.length) { script.textContent = '(' + callback.toString() + ')();'; }
+      document.body.appendChild(script);
+    }, false);
     document.body.appendChild(script);
-  }, false);
-  document.body.appendChild(script);
+  }
 }
 
 function userScript()
@@ -309,4 +314,4 @@ function userScript()
   });
 }
 
-useJquery(userScript);
+useLibrary(['//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'], userScript);
