@@ -44,10 +44,11 @@ function userScript()
     return this.replace(/&/g, '&amp;').replace(/'/g, '&quot;').replace(/'/g, '&#039;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   };
 
+  var $githubElement = $('.tabnav');
   var msg = 'Search this wiki...';
   var html = '<div id="search-wiki" style="display:inline-block;position:absolute;bottom:10px;right:0;">' +
              '<input type="text" value="'+ msg + '" id="search-words" style="color:#999;padding:3px 2px;"></div>';
-  $('.subnav-bar').append(html);
+  $githubElement.append(html);
 
   $(function(){
     $('#search-words').focus(function() {
@@ -109,13 +110,7 @@ function userScript()
     $('.pagination a').click(function(){
       changePage($(this).attr('rel'));
     });
-    $('.pagination span').css('padding', '0.5em 0.7em 0.4em').css('border', '1px solid #AAAADD').css('border-radius', '3px');
-    $('.pagination a').css('padding', '0.5em 0.7em 0.4em').css('background-color', '#DDEAF3').css('line-height', '1').css('border-radius', '3px');
-    $('.pagination a').hover(function(){
-      $(this).css('background-color', '#336699').css('color', '#FFFFFF');
-    }, function(){
-      $(this).css('background-color', '#DDEAF3').css('color', '#336699');
-    });
+    $('.pagination span').addClass('current');
     $('#close-results > a').click(function(){
       $('#search-words').css('color', '#999').val(msg);
       $('#results').fadeOut('slow');
@@ -277,7 +272,7 @@ function userScript()
     if (cached) {
       search();
     } else {
-      $('.subnav-bar').find('a').each(function(){
+      $githubElement.find('a').each(function(){
         if ('Pages' == $(this).html()) {
           $.get($(this).attr('href'), function(data){ pages(data); });
         }
@@ -293,10 +288,9 @@ function userScript()
     input_word = text.trim();
     number_of_search = 0;
     if (input_word == '') { return; }
-    var close_image = 'https://a248.e.akamai.net/assets.github.com/images/modules/account/close_pill.png';
     var html = '<div id="results" style="position:relative;">' +
-                 '<p id="close-results" style="position:absolute;top:0px;right:0px;width:18px;height:18px;display:block;overflow:hidden;text-indent:-7777em;">' +
-                 '<a href="#" style="background:url(' + close_image + ') no-repeat scroll 0 0 transparent;display:block;width:18px;height:18px;">Close</a></p>' +
+                 '<p id="close-results" style="position:absolute;top:0px;right:0px;width:16px;height:16px;display:block;overflow:hidden;">' +
+                 '<a class="delete-note mini-icon mini-icon-remove-close" href="#" style="display:block;width:16px;height:16px;text-decoration:none;">Close</a></p>' +
                  '<h2 style="font-size:20px;font-weight:normal;color:#495961;font-family:Helvetica,arial,freesans,clean,sans-serif;">Search Results</h2>' +
                  '<div id="statusbar" style="background-color:#FAFFA6; border-top: 1px solid #B8D1E3; margin-bottom: 1.3em; overflow: hidden; position:relative;">' +
                    '<div id="progress" style="position:absolute;background-color:#DDEAF3;width:0%;height:100%;"> </div>' +
