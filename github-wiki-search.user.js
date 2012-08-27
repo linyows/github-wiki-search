@@ -74,7 +74,7 @@ function userScript()
   // Pagination
   var current_page = 1;
   var last_page = 1;
-  var per_page = 3;
+  var per_page = 7;
 
   function hashArgs() {
     var args = {};
