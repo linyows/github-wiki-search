@@ -56,7 +56,9 @@ function userScript()
     }).blur(function() {
       if (jQuery.trim($(this).val()) === '') { $(this).css('color', '#999').val(msg); }
     });
-    highlightKeyword('#wiki-wrapper');
+    highlightKeyword('#wiki-content');
+    highlightKeyword('#results');
+    highlightKeyword('.instapaper_title');
   });
 
   // Keyword
