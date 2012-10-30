@@ -37,7 +37,7 @@ function userScript()
                .replace(new RegExp('\f', 'g'), '')
                .replace(new RegExp('\r', 'g'), '')
                .replace(new RegExp('<.*?>', 'ig'), '')
-               .replace(new RegExp('[\s　\t\n\r\"]', 'g'), '')
+               .replace(new RegExp('[\t\n\r\"]', 'g'), '')
                .replace(new RegExp('\"', 'g'), '');
   };
   String.prototype.sanitize = function(){
