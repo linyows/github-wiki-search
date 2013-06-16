@@ -10,6 +10,7 @@ Browser
 - Chrome
 - Firefox - need [Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)
 - Safari - need [NinjaKit](http://d.hatena.ne.jp/os0x/20100612/1276330696)
+- Opera - need `UserJavaScriptonHTTPS` enabled ([why and how] (http://www.opera.com/docs/userjs/using/#securepages))
 
 Install
 -------
