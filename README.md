@@ -8,7 +8,7 @@ Browser
 -------
 
 - Chrome
-- Firefox - need [Greasemonekey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)
+- Firefox - need [Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)
 - Safari - need [NinjaKit](http://d.hatena.ne.jp/os0x/20100612/1276330696)
 
 Install
