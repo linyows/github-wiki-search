@@ -279,8 +279,8 @@
     number_of_search = 0;
     if (input_word == '') { return; }
     var html = '<div id="results" style="position:relative;">' +
-                 '<p id="close-results" style="position:absolute;top:0px;right:0px;width:16px;height:16px;display:block;overflow:hidden;">' +
-                 '<a class="delete-note mini-icon mini-icon-remove-close" href="#" style="display:block;width:16px;height:16px;text-decoration:none;">Close</a></p>' +
+                 '<p id="close-results" style="position:absolute;top:-10px;right:0px;display:block;overflow:hidden;">' +
+                 '<a class="minibutton danger" href="#">Close</a></p>' +
                  '<h2 style="font-size:20px;font-weight:normal;color:#495961;font-family:Helvetica,arial,freesans,clean,sans-serif;">Search Results</h2>' +
                  '<div id="statusbar" style="background-color:#FAFFA6; border-top: 1px solid #B8D1E3; margin-bottom: 1.3em; overflow: hidden; position:relative;">' +
                    '<div id="progress" style="position:absolute;background-color:#DDEAF3;width:0%;height:100%;"> </div>' +
