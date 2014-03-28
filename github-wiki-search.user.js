@@ -35,7 +35,7 @@
   var $githubElement = $('.tabnav');
   var msg = 'Search this wiki...';
   var html = '<div id="search-wiki" style="display:inline-block;float:right; margin-left: 10px;">' +
-             '<input type="text" value="'+ msg + '" id="search-words" style="color:#999;padding:3px 2px; min-height: 26px;"></div>';
+             '<input type="text" value="'+ msg + '" id="search-words" style="color:#999;padding:3px 5px; min-height: 26px;"></div>';
   $githubElement.before(html);
 
   $(function(){
