@@ -19,7 +19,7 @@
         "github-wiki-search.user.js"
       ],
       "matches": [
-        "https://github.com/*"
+        "https://github.com/*/*/wiki*"
       ]
     }
   ]
