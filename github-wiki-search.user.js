@@ -5,7 +5,7 @@
 // @include        https://github.com/*
 // @namespace      http://userscripts.org/scripts/show/129930
 // @author         linyows <linyows@gmail.com>
-// @version        1.2.3
+// @version        1.3.0
 // ==/UserScript==
 
 (function(){
