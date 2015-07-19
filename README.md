@@ -7,7 +7,7 @@ Installation
 ------------
 
 - [Chrome Webstore](https://chrome.google.com/webstore/detail/github-wiki-search/gdifdhnjmjaidbajhapmbcbnoocoeooc)
-- [Userscripts.org](http://userscripts.org/scripts/show/129930)
+- [Userscripts.org](http://userscripts.org/scripts/show/129930) or [userscripts-mirror.org](http://userscripts-mirror.org/scripts/show/129930)
 
 Screenshots
 -----------
