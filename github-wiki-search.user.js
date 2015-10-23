@@ -39,7 +39,7 @@
     var $pageList = $('.wiki-pages');
     var msg = 'Search this wiki...';
     var html = '<div id="search-wiki" style="display:inline-block;margin: 0 0 0 10px;">' +
-             '<input type="text" value="'+ msg + '" id="search-words" style="color:#999;padding:3px 5px; min-height: 26px;"></div>';
+             '<input type="text" value="'+ msg + '" id="search-words" style="color:#999;padding:3px 5px; min-height: 26px; margin-top:-20px"></div>';
     $actions.prepend(html);
 
     $(function(){
