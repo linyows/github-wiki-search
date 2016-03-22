@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name           Github Wiki Search
+// @name           Wiki Search for Github
 // @description    Search wiki of the repository on Github.
 // @namespace      linyows
 // @include        https://github.com/*
 // @namespace      http://userscripts.org/scripts/show/129930
 // @author         linyows <linyows@gmail.com>
-// @version        1.4.0
+// @version        2.0.0
 // ==/UserScript==
 
 (function(){
