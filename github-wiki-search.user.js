@@ -296,7 +296,10 @@
   };
 
   function allowedLocation(callback) {
-    if (/^https?:\/\/github\.com\/.*?\/.*?\/wiki/.test(location.href)) {
+    if (
+      /^https?:\/\/github\.com\/.*?\/.*?\/wiki/.test(location.href) || 
+      /^https?:\/\/ghe\..*\/wiki/.test(location.href)
+    ) {
       callback();
     }
   }
@@ -311,6 +314,5 @@
     });
   });
   observer.observe(document.body, { childList: true , subtree: true});
-
   allowedLocation(githubWikiSearch);
 }());
