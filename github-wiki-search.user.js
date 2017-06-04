@@ -296,7 +296,7 @@
   };
 
   function allowedLocation(callback) {
-    if (/^https?:\/\/github\.com\/.*?\/.*?\/wiki/.test(location.href)) {
+    if (/^https?:\/\/github(\..*)?\.com\/.*?\/.*?\/wiki/.test(location.href)) {
       callback();
     }
   }
